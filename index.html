@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the States Stack Up – Victoria in focus</title>
+<meta name="description" content="A state-by-state comparison of Australia's states on debt, tax, jobs, housing, safety, energy and integrity, with Victoria in focus. 2026-27 budget figures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a six-state ledger. Every metric is a row, every state a column, coloured best to worst; Victoria's column is outlined. The user's red ✘ / green ✔ and yellow highlighter carry the verdicts. */
+:root{
+  --paper:#f6f7fa;--card:#ffffff;--ink:#16213a;--muted:#5a6479;--rule:#d8dde7;
+  --navy:#0b2a5b;--navy-ink:#ffffff;
+  --bad:#c8102e;--bad-fill:#fde8eb;--bad-soft:#fbd3d9;
+  --warn:#b45309;--warn-fill:#fff3dc;
+  --pink:#c2477a;--pink-fill:#fbe7f0;
+  --good:#2b7a35;--good-fill:#e4f3e6;--good-soft:#c9e8cd;
+  --mark:rgba(255,214,0,.55);--bar:#b9c3d6;--lab:#f6dede;--coa:#dbe6f7;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c1322;--card:#121b2e;--ink:#e7ecf6;--muted:#9aa6bf;--rule:#26324d;--navy:#14366f;
+    --bad:#ff6474;--bad-fill:#3a1620;--bad-soft:#5a2230;--warn:#f5b04a;--warn-fill:#3a2a12;--pink:#f08ab2;--pink-fill:#3a1a2a;
+    --good:#72d37d;--good-fill:#132e19;--good-soft:#1f4a28;--mark:rgba(255,206,0,.32);--bar:#3a4867;--lab:#3a2027;--coa:#1d2c48;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c1322;--card:#121b2e;--ink:#e7ecf6;--muted:#9aa6bf;--rule:#26324d;--navy:#14366f;
+  --bad:#ff6474;--bad-fill:#3a1620;--bad-soft:#5a2230;--warn:#f5b04a;--warn-fill:#3a2a12;--pink:#f08ab2;--pink-fill:#3a1a2a;
+  --good:#72d37d;--good-fill:#132e19;--good-soft:#1f4a28;--mark:rgba(255,206,0,.32);--bar:#3a4867;--lab:#3a2027;--coa:#1d2c48;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--muted);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible,.tip:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4vw,40px);font-weight:800;font-stretch:85%;letter-spacing:-.01em}
+h3{font-size:21px;font-weight:700;font-stretch:90%}
+p{margin:0;max-width:68ch}
+.num,td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.mark{background:linear-gradient(transparent 52%,var(--mark) 52%,var(--mark) 92%,transparent 92%);padding:0 2px}
+.x{color:var(--bad);font-weight:700}
+.t{color:var(--good);font-weight:700}
+.w{color:var(--warn);font-weight:700}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.note{font-size:15px;color:var(--muted)}
+
+/* Tooltips for terms */
+.tip{border-bottom:2px dotted currentColor;cursor:help;position:relative;white-space:nowrap}
+.tip::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:max-content;max-width:300px;
+  white-space:normal;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:14px;font-weight:400;line-height:1.45;
+  padding:10px 12px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .15s;z-index:20;text-transform:none;letter-spacing:0}
+.tip:hover::after,.tip:focus::after{opacity:1}
+.hero .tip::after{background:#fff;color:#16213a}
+table.matrix .tip{white-space:normal}
+table.matrix .tip::after{left:calc(100% + 10px);bottom:auto;top:-6px;transform:none;width:260px}
+
+/* Hero */
+.hero{background:var(--navy);color:var(--navy-ink);padding:52px 0 44px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-40px;width:380px;height:380px;opacity:.12;
+  background:radial-gradient(circle,#fff 0 3px,transparent 4px) 0 0/76px 76px;transform:rotate(12deg);pointer-events:none}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.hero h1{font-size:clamp(42px,7.4vw,84px);font-weight:900;font-stretch:76%;letter-spacing:-.02em;margin:12px 0 4px}
+.hero .sub{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);font-weight:600;font-stretch:90%;opacity:.9;margin-bottom:18px}
+.hero .lede{font-size:20px;max-width:60ch;opacity:.95}
+.hero .lede b{background:linear-gradient(transparent 55%,rgba(255,214,0,.6) 55%,rgba(255,214,0,.6) 92%,transparent 92%);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+.tile{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:16px}
+.tile .big{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:clamp(30px,4vw,44px);line-height:1}
+.tile .lab{font-size:15px;line-height:1.35;margin-top:8px;opacity:.92}
+.tile .rk{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:99px;background:#c8102e;color:#fff}
+@media (max-width:820px){.tiles{grid-template-columns:repeat(2,1fr)}}
+
+/* Nav */
+nav.toc{position:sticky;top:0;z-index:15;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.toc a{flex:none;font-family:var(--display);font-size:14px;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:99px;border:1px solid var(--rule);background:var(--card)}
+nav.toc a:hover{border-color:var(--navy)}
+
+section{padding:56px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-top:4px solid var(--ink);padding-top:14px;margin-bottom:22px}
+.sec-head .no{font-family:var(--mono);font-size:14px;color:var(--muted)}
+.sec-head .kick{font-size:16px;color:var(--muted);flex-basis:100%}
+.stack{display:grid;gap:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px;min-width:0}
+.card h3{margin:0 0 12px}
+.bottom{background:var(--card);border:1px solid var(--rule);border-left:6px solid var(--bad);border-radius:8px;padding:16px 20px;font-size:19px}
+.bottom.good{border-left-color:var(--good)}
+.bottom.warnb{border-left-color:var(--warn)}
+.bottom .tag{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:4px}
+
+ul.marks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.marks li{display:grid;grid-template-columns:26px 1fr;gap:6px;align-items:start}
+ul.marks li > span:first-child{font-size:20px;line-height:1.4}
+ol.plain{margin:0;padding-left:22px;display:grid;gap:10px}
+
+/* Tables */
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--card)}
+.card .tbl{border:0;border-radius:0}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:color-mix(in srgb,var(--rule) 35%,var(--card))}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap}
+tr.vic td{background:var(--bad-fill);font-weight:600}
+tr.vic td:first-child{box-shadow:inset 5px 0 0 var(--bad)}
+td.bad{background:var(--bad-fill);font-weight:600}
+.badge{display:inline-block;font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:5px;white-space:nowrap;vertical-align:1px}
+.b-warn{background:var(--warn-fill);color:var(--warn);border:1px solid var(--warn)}
+.b-bad{background:var(--bad);color:#fff}
+.b-ok{background:var(--good-fill);color:var(--good)}
+
+/* State matrix */
+.matrix-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--card)}
+table.matrix{min-width:1040px;font-size:15px}
+table.matrix th,table.matrix td{padding:9px 10px;text-align:center;border-bottom:1px solid var(--rule)}
+table.matrix th:first-child,table.matrix td:first-child{text-align:left;position:sticky;left:0;background:var(--card);z-index:1;min-width:210px}
+table.matrix thead th{background:var(--card);vertical-align:bottom}
+table.matrix thead th .st{font-size:20px;font-weight:900;font-stretch:80%;color:var(--ink);letter-spacing:0;text-transform:none;display:block}
+table.matrix thead th .gov{display:block;font-family:var(--body);font-size:12.5px;text-transform:none;letter-spacing:0;color:var(--muted);font-weight:400;line-height:1.3;margin-top:2px}
+table.matrix td.grp{text-align:left;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:12.5px;letter-spacing:.08em;color:var(--muted);background:color-mix(in srgb,var(--rule) 30%,var(--card));padding-top:7px;padding-bottom:7px}
+table.matrix td.v{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+table.matrix .c-best{background:var(--good-soft)}
+table.matrix .c-good{background:var(--good-fill)}
+table.matrix .c-poor{background:var(--bad-fill)}
+table.matrix .c-worst{background:var(--bad-soft);font-weight:700}
+table.matrix .vcol{box-shadow:inset 3px 0 0 var(--navy),inset -3px 0 0 var(--navy)}
+table.matrix thead .vcol{box-shadow:inset 3px 0 0 var(--navy),inset -3px 0 0 var(--navy),inset 0 3px 0 var(--navy)}
+table.matrix td.rank{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);align-items:center}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--rule)}
+
+/* Bars */
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:132px 1fr 84px;gap:10px;align-items:center;font-size:15px}
+.bar .lab{font-family:var(--display);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .track{height:18px;background:color-mix(in srgb,var(--rule) 45%,transparent);border-radius:4px;overflow:hidden}
+.bar .fill{display:block;height:100%;background:var(--bar);border-radius:4px}
+.bar.hl .fill{background:var(--bad)}
+.bar.hl.okay .fill{background:var(--good)}
+.bar.hl .lab,.bar.hl .val{font-weight:800}
+.bar .val{font-family:var(--mono);font-size:14px;text-align:right}
+.chart-cap{font-size:14px;color:var(--muted);margin-top:10px}
+@media (max-width:480px){.bar{grid-template-columns:96px 1fr 70px}}
+
+/* Then vs now */
+.vs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--card)}
+.vs > div{padding:20px}
+.vs .then{border-right:1px solid var(--rule)}
+.vs .now{background:var(--bad-fill)}
+.vs .yr{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.vs .amt{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:clamp(34px,5vw,54px);line-height:1}
+.vs .sub{font-size:15px;color:var(--muted)}
+
+/* Warning cards */
+.warncard{background:var(--card);border:1px solid var(--rule);border-top:5px solid var(--warn);border-radius:10px;padding:18px}
+.warncard h3{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-size:19px}
+.warncard .stat{font-family:var(--mono);font-size:14px;color:var(--muted);margin-bottom:6px}
+
+/* Accordions */
+details.acc{background:var(--card);border:1px solid var(--rule);border-radius:10px}
+details.acc > summary{list-style:none;cursor:pointer;padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+details.acc > summary::-webkit-details-marker{display:none}
+details.acc > summary .sh{font-family:var(--display);font-weight:800;font-size:20px;font-stretch:90%}
+details.acc > summary .ss{display:block;font-size:16px;color:var(--muted);margin-top:4px}
+details.acc > summary .chev{font-family:var(--mono);font-size:13px;border:1px solid var(--rule);border-radius:99px;padding:4px 12px;white-space:nowrap}
+details.acc[open] > summary .chev .o{display:none}
+details.acc:not([open]) > summary .chev .c{display:none}
+details.acc > .inner{padding:0 20px 20px;display:grid;gap:16px}
+
+.verdict{display:inline-block;font-family:var(--display);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:5px;white-space:nowrap}
+.v-no{background:var(--bad-fill);color:var(--bad)}
+.v-part{background:var(--warn-fill);color:var(--warn)}
+.v-yes{background:var(--good-fill);color:var(--good)}
+
+/* Debt by government dumbbells */
+.db{display:grid;gap:14px}
+.db-row{display:grid;grid-template-columns:230px 1fr;gap:14px;align-items:center}
+.db-gov b{font-family:var(--display);font-size:16px;display:block;line-height:1.2}
+.db-gov span{font-size:13px;color:var(--muted)}
+.party{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px;margin-left:4px;vertical-align:1px;border:1px solid var(--rule);color:var(--ink)}
+.db-track{position:relative;height:34px;border-left:1px solid var(--rule)}
+.db-track .gl{position:absolute;top:0;bottom:0;border-left:1px dashed var(--rule)}
+.db-line{position:absolute;top:15px;height:4px;border-radius:2px}
+.db-dot{position:absolute;top:10px;width:14px;height:14px;border-radius:50%;transform:translateX(-50%);border:3px solid var(--ink);background:var(--card)}
+.db-dot.end{background:var(--ink)}
+.db-dot.fc{border-style:dashed;background:transparent;opacity:.7}
+.db-lab{position:absolute;top:-4px;font-family:var(--mono);font-size:12px;white-space:nowrap;transform:translateX(-50%)}
+.db-axis{display:grid;grid-template-columns:230px 1fr;gap:14px}
+.db-axis .ax{position:relative;height:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.db-axis .ax span{position:absolute;transform:translateX(-50%)}
+@media (max-width:640px){.db-row,.db-axis{grid-template-columns:1fr}.db-axis > div:first-child{display:none}}
+.tabs{display:inline-flex;border:1px solid var(--rule);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.tabs button{font-family:var(--display);font-weight:700;font-size:14px;padding:6px 14px;border:0;background:var(--card);color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.tabs button:focus-visible{outline:3px solid var(--mark);outline-offset:-3px}
+.why{display:grid;gap:6px;font-size:15.5px;margin-top:10px}
+.why b{font-family:var(--display)}
+.pp{font-size:15px}
+.pp td{vertical-align:top}
+.pp th:first-child{min-width:120px}
+.bign{font-family:var(--display);font-weight:900;font-stretch:80%;font-size:40px;color:var(--bad);line-height:1;margin-bottom:6px}
+.lc svg{width:100%;height:auto;display:block;overflow:visible}
+.lc text{font-family:var(--mono);font-size:12px;fill:var(--muted)}
+.lc .gov{font-family:var(--display);font-size:13px;font-weight:700;fill:var(--ink)}
+.lc .vl{font-family:var(--mono);font-size:12.5px;font-weight:600;fill:var(--ink)}
+.lc .ln{fill:none;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.lc .lnf{fill:none;stroke:var(--ink);stroke-width:3;stroke-dasharray:6 5}
+.lc .area{fill:var(--bad);opacity:.08}
+.lc{position:relative}
+.lc circle{fill:var(--card);stroke:var(--ink);stroke-width:2.5;pointer-events:none}
+.lc circle.hit{fill:transparent;stroke:none;pointer-events:all;cursor:pointer}
+.lc circle.hit:focus{outline:none}
+.lc-tip{position:absolute;transform:translate(-50%,calc(-100% - 16px));background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:13px;font-weight:600;padding:6px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.lc-tip.on{opacity:1}
+.lc-tip::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--ink)}
+.lc circle.f{stroke-dasharray:3 2}
+.lc .grid{stroke:var(--rule);stroke-width:1}
+footer{margin-top:64px;padding:32px 0 48px;border-top:4px solid var(--ink);font-size:15px}
+footer .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:860px){footer .cols{grid-template-columns:1fr}}
+footer h3{font-size:16px;margin:0 0 8px}
+footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">State comparison · November 2026 · 2026-27 budget figures</div>
+    <h1>How the States Stack Up</h1>
+    <div class="sub">Victoria in focus · six states, one scorecard</div>
+    <p class="lede">On the latest figures Victoria has <b>the highest debt and the highest tax burden of any state</b>, the highest unemployment and the least social housing. It keeps strong schools, slightly cheaper power (for now) and a solid record on building homes. Several other states are now borrowing fast too.</p>
+    <div class="tiles">
+      <div class="tile"><div class="big num">$61,400</div><div class="lab">State net debt per Victorian household (NSW about $38,800)</div><span class="rk">Worst state</span></div>
+      <div class="tile"><div class="big num">30.2%</div><div class="lab">Net debt as a share of the economy (<span class="tip" tabindex="0" data-tip="NFPS: the non-financial public sector. Core government plus the businesses the state owns, like water and transport authorities. The broadest debt measure.">NFPS</span>) · WA 9.7%</div><span class="rk">Worst state</span></div>
+      <div class="tile"><div class="big num">6.11%</div><div class="lab">State tax as a share of the economy (<span class="tip" tabindex="0" data-tip="GSP: gross state product, everything a state produces in a year. The state version of GDP. Victoria's is about $700 billion.">GSP</span>) · WA 3.24%</div><span class="rk">Worst state</span></div>
+      <div class="tile"><div class="big num">5.2%</div><div class="lab">Unemployment, August 2026 (NSW 4.3%)</div><span class="rk">Worst state</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#summary">Summary</a>
+    <a href="#states">State by state</a>
+    <a href="#finances">Debt</a>
+    <a href="#history">By government</a>
+    <a href="#rules">Debt rules</a>
+    <a href="#tax">Tax</a>
+    <a href="#economy">Jobs</a>
+    <a href="#housing">Housing</a>
+    <a href="#services">Services</a>
+    <a href="#energy">Energy</a>
+    <a href="#integrity">Integrity</a>
+    <a href="#verdict">Verdict</a>
+    <a href="#election">Election</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="sec-head"><h2><span class="mark">The five things to take from this</span></h2></div>
+  <div class="grid2">
+    <div class="card">
+      <ul class="marks">
+        <li><span class="x">✘</span><span><b>Debt:</b> the state owes about $61,000 per Victorian household (about $39,000 in NSW, $22,000 in Queensland). Interest alone costs the state $8.9 billion a year, about $24 million every day. Victoria owes more than NSW, SA and Tasmania combined, and it is still rising.</span></li>
+        <li><span class="x">✘</span><span><b>Tax:</b> Victoria taxes the most and still borrows the most; several new property taxes exist specifically to fund debt.</span></li>
+        <li><span class="x">✘</span><span><b>Jobs and growth:</b> unemployment is the highest of any state and output per person is falling, which weakens the base that has to repay the debt.</span></li>
+        <li><span class="x">✘</span><span><b>Housing:</b> past building was strong, but the pipeline is now shrinking and social housing is the lowest in the country.</span></li>
+        <li><span class="t">✔</span><span><b>Strengths are real but narrow:</b> schools and power prices are genuinely good; the power advantage is at risk as coal closes.</span></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <div class="bottom warnb"><span class="tag"><span class="badge b-warn">⚠ Warning</span> Not just Victoria</span>Queensland, South Australia and Tasmania are now adding debt quickly. Queensland's net debt is forecast to nearly double in three years. Victoria starts from the highest base, but the trend is a national one.</div>
+      <div class="card">
+        <h3>Net debt per household, 2026-27</h3>
+        <div class="bars" data-chart="household"></div>
+        <p class="chart-cap">General government net debt ÷ households, states only. WA not shown; it is the lowest on every debt measure. Including the territories, the NT and ACT carry more debt per person than Victoria (see the state-by-state table).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATE MATRIX -->
+<section id="states">
+  <div class="sec-head"><h2>State by state</h2><span class="kick">Each row is coloured from best to worst among the states and territories with data. Victoria's column is outlined. Hover or tap underlined terms for an explanation.</span></div>
+  <div class="stack">
+    <div class="legend">
+      <span><span class="sw" style="background:var(--good-soft)"></span>Best</span>
+      <span><span class="sw" style="background:var(--good-fill)"></span>Better</span>
+      <span><span class="sw" style="background:var(--card)"></span>Middle</span>
+      <span><span class="sw" style="background:var(--bad-fill)"></span>Worse</span>
+      <span><span class="sw" style="background:var(--bad-soft)"></span>Worst</span>
+      <span><span class="badge b-warn">⚠</span> Debt rising fast</span>
+    </div>
+    <div class="matrix-wrap" id="matrix"></div>
+    <p class="note">Governing party shown with the year it took office. Debt reflects decisions by current and earlier governments: Queensland's LNP took office in October 2024 and inherited part of its debt path. Tasmania's 2026-27 debt is an estimate. "—" means no comparable figure. Unemployment uses the February 2026 trend series, the latest with all six states; Victoria's August figure is 5.2%.</p>
+  </div>
+</section>
+
+<!-- 1 FINANCES -->
+<section id="finances">
+  <div class="sec-head"><span class="no">01</span><h2>Debt and public finances</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag"><span class="mark">Bottom line</span></span><span class="x">✘</span> Victoria carries the heaviest debt load of any state relative to the size of its economy (<span class="tip" tabindex="0" data-tip="GSP: gross state product, everything a state produces in a year. Comparing debt with GSP is like a bank comparing a mortgage with a household's income.">GSP</span>), and it is not projected to bring that ratio down.</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Net debt, % of GSP, 2026-27 (<span class="tip" tabindex="0" data-tip="NFPS: the non-financial public sector. Core government plus state-owned businesses such as water and transport authorities. The broadest like-for-like measure across states.">NFPS</span>)</h3>
+        <div class="bars" data-chart="nfps"></div>
+        <p class="chart-cap">On the narrower <span class="tip" tabindex="0" data-tip="General government: the core of government only (departments, schools, hospitals, police), without state-owned businesses.">general government</span> measure Victoria is at nearly 25%, the highest of the six states, against 5.7% in WA.</p>
+      </div>
+      <div class="card">
+        <h3>Where it's heading, 2029-30</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>State</th><th>Governing</th><th>2026-27</th><th>2029-30</th><th>Trend</th></tr></thead>
+          <tbody>
+            <tr class="vic"><td>Victoria</td><td>Labor</td><td class="n">30.2%</td><td class="n">30.4%</td><td>Flat, highest</td></tr>
+            <tr><td>Tasmania</td><td>Liberal</td><td class="n">29.8%</td><td class="n">31.8%</td><td><span class="badge b-warn">⚠ Rising</span></td></tr>
+            <tr><td>Queensland</td><td>LNP</td><td class="n">17.2%</td><td class="n">23.3%</td><td><span class="badge b-warn">⚠ Rising fast</span></td></tr>
+            <tr><td>South Aust.</td><td>Labor</td><td class="n">23.3%</td><td>—</td><td><span class="badge b-warn">⚠ Rising</span></td></tr>
+            <tr><td>NSW</td><td>Labor</td><td class="n">18.0%</td><td class="n">18.4%</td><td>Flat</td></tr>
+            <tr><td>WA</td><td>Labor</td><td class="n">9.7%</td><td class="n">10.8%</td><td>Low</td></tr>
+            <tr><td>NT</td><td>CLP</td><td class="n">30.8%</td><td class="n">28.4%</td><td>Falling slowly</td></tr>
+            <tr><td>ACT</td><td>Labor</td><td class="n">21.9%</td><td class="n">21.3%</td><td><span class="badge b-warn">⚠ Rising in dollars</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:6px"><span class="badge b-warn">⚠ Warning</span> Other states borrowing fast, and what for</h3>
+    <p>Borrowing to build long-lived assets (hospitals, transport) is easier to justify than borrowing to cover day-to-day running costs. South Australia's debt is almost all for building; Tasmania's is mostly running deficits; Queensland's is both. Victoria has done both.</p>
+    <div class="grid3">
+      <div class="warncard"><h3>Queensland <span class="note">LNP · since 2024</span></h3><div class="stat">$51B → $98B net debt by 2029-30</div><p>Net debt nearly doubles in three years; downgraded by S&amp;P to AA after the June 2026 budget.</p>
+        <div class="why"><b>What the borrowing pays for</b>
+          <span>• A record $119B four-year building program: 3 new and 10 expanded hospitals (2,600 more beds), roads, housing and 2032 Olympic venues.</span>
+          <span>• A $6.2B operating deficit in 2026-27, so some borrowing also covers day-to-day spending. Surplus forecast for 2029-30.</span>
+          <span>• The government says Labor's path would have reached $290B total debt by 2029-30, against its $216B.</span></div></div>
+      <div class="warncard"><h3>South Australia <span class="note">Labor · since 2022</span></h3><div class="stat">$28.8B → $40.9B by 2029-30</div><p>Net debt rises from 85% to 112% of annual revenue. Still rated AA+.</p>
+        <div class="why"><b>What the borrowing pays for</b>
+          <span>• Mainly two projects: the $15.4B Torrens to Darlington tunnel (North-South Corridor) and the $3.2B new Women's and Children's Hospital.</span>
+          <span>• The budget runs small operating surpluses, so the debt is for building, not day-to-day costs.</span>
+          <span>• Also a $650M share of the Whyalla steelworks rescue. Interest reaches $1.9B in 2026-27.</span></div></div>
+      <div class="warncard"><h3>Tasmania <span class="note">Liberal · since 2014</span></h3><div class="stat">29.8% → 31.8% of GSP</div><p>Net debt free in 2019; now peaking near $10B in 2028-29. Lowest Moody's rating.</p>
+        <div class="why"><b>What the borrowing pays for</b>
+          <span>• Mostly a run of operating deficits since the pandemic (day-to-day spending), the weakest kind of borrowing.</span>
+          <span>• Cost overruns, including a $506M rescue of the Spirit of Tasmania ferry operator, and the $1.13B Macquarie Point stadium.</span>
+          <span>• Now cutting $1.47B and about 1,700 public sector jobs; S&amp;P doubts the plan will work.</span></div></div>
+    </div>
+    <div class="warncard"><h3>The territories <span class="note">NT: CLP since 2024 · ACT: Labor since 2001</span></h3>
+      <div class="grid2">
+        <p class="pp"><b>Northern Territory:</b> net debt of $12.56B in 2026-27, equal to 117% of a year's revenue, with interest heading above $1B a year. The federal Parliamentary Budget Office ranks it the highest net debt per person in the country.</p>
+        <p class="pp"><b>ACT:</b> debt-free in 2011-12; net debt now $12.5B and forecast to reach $14.1B by 2029-30, about eight times its 2015-16 level. Ranked second highest per person, ahead of Victoria (ACT figures include local council services).</p>
+      </div></div>
+
+    <h3 style="margin-top:6px">Debt per person and per household (2026-27)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>State</th><th>Net debt</th><th>Per person</th><th>People per household</th><th>Per household</th><th>Compared with NSW</th></tr></thead>
+      <tbody>
+        <tr class="vic"><td>Victoria</td><td class="n">$175.6B</td><td class="n">$24,500</td><td class="n">2.5</td><td class="n">$61,400</td><td>58% more</td></tr>
+        <tr><td>NSW</td><td class="n">$129.3B</td><td class="n">$14,900</td><td class="n">2.6</td><td class="n">$38,800</td><td>—</td></tr>
+        <tr><td>South Australia</td><td class="n">$28.8B</td><td class="n">$15,000</td><td class="n">2.4</td><td class="n">$36,100</td><td>7% less</td></tr>
+        <tr><td>Tasmania</td><td class="n">about $8B</td><td class="n">$13,900</td><td class="n">2.3</td><td class="n">$31,900</td><td>18% less</td></tr>
+        <tr><td>Queensland</td><td class="n">$51.3B</td><td class="n">$8,900</td><td class="n">2.5</td><td class="n">$22,300</td><td>43% less</td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="x">✘</span> <span class="mark">Put simply: the state government owes about <b>$61,000 on behalf of every Victorian household</b>.</span> At 2026-27 interest costs ($8.9 billion), that is about <b>$3,100 a year per household</b> in state interest before a single service is delivered. The last column shows how each state's per-household debt compares with NSW, the most similar economy.</p>
+    <div class="bottom"><span class="tag"><span class="mark">Every dollar of interest is a dollar not spent on services</span></span>
+      <div class="grid3" style="margin-top:10px">
+        <div><div class="bign">$8.9B</div><p class="pp">Interest in 2026-27, about <b>$24 million a day</b>. Rising to $11.8B by 2029-30, close to <b>$1 in every $10</b> the state spends.</p></div>
+        <div><div class="bign">28%</div><p class="pp">Interest equals about 28% of the whole health budget ($32.3B) and nearly half the education budget ($18.6B).</p></div>
+        <div><div class="bign">9×</div><p class="pp">About nine times this year's record $1B for road maintenance. That money cannot go to hospital beds, ambulances, teachers, police or lower taxes.</p></div>
+      </div></div>
+
+    <details class="acc">
+      <summary><span><span class="sh">Does Victoria owe more than the other states combined?</span><span class="ss">More than NSW, SA and Tasmania together, yes. More than all four eastern and southern states, no longer.</span></span><span class="chev"><span class="o">Show detail +</span><span class="c">Hide −</span></span></summary>
+      <div class="inner">
+        <div class="tbl"><table>
+          <thead><tr><th>General government net debt, 2026-27</th><th>Combined</th><th>Victoria $175.6B</th></tr></thead>
+          <tbody>
+            <tr><td>Qld + SA + Tas</td><td class="n">$88B</td><td class="bad">Twice as much</td></tr>
+            <tr><td>NSW + SA + Tas</td><td class="n">$166B</td><td class="bad">More</td></tr>
+            <tr><td>NSW + Qld + Tas</td><td class="n">$189B</td><td>Slightly less</td></tr>
+            <tr><td>NSW + Qld + SA + Tas</td><td class="n">$217B</td><td>Less (Victoria is 81%)</td></tr>
+          </tbody>
+        </table></div>
+        <p>The claim was true in 2022 (Victoria's forecast $167.5B against $159.2B for NSW, Queensland and Tasmania combined), but Queensland's borrowing has since tipped the balance. <span class="mark">What is accurate today: Victoria owes more than NSW, South Australia and Tasmania combined, even though NSW alone has 1.2 times Victoria's population.</span></p>
+      </div>
+    </details>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Credit ratings (S&amp;P)</h3>
+        <div class="tbl"><table>
+          <tbody>
+            <tr><td>WA</td><td class="n">AAA</td><td class="note">Only AAA state</td></tr>
+            <tr><td>NSW</td><td class="n">AA+</td><td class="note">Outlook upgraded</td></tr>
+            <tr><td>South Australia</td><td class="n">AA+</td><td class="note">Stable</td></tr>
+            <tr><td>Queensland</td><td class="n">AA</td><td class="note"><span class="w">⚠</span> Downgraded June 2026</td></tr>
+            <tr class="vic"><td>Victoria</td><td class="n">AA</td><td class="note">Lost AAA in 2020</td></tr>
+            <tr><td>Tasmania</td><td class="n">AA</td><td class="note">Lowest Moody's rating</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="margin-top:8px">A lower rating means paying a higher interest rate every time debt is refinanced.</p>
+      </div>
+      <div class="card">
+        <h3>Budget results and interest</h3>
+        <ul class="marks">
+          <li><span class="x">✘</span><span><b>Deficit 2026-27:</b> Victoria about −2.4% of GSP, Queensland −3.2%, Tasmania −4.4%. Not the worst annual borrower, but borrowing from the highest starting point.</span></li>
+          <li><span class="w">⚠</span><span><b>All states together:</b> interest about $27B in 2026-27, rising to $38B by 2029-30; combined gross debt about $844B, passing $1 trillion. <span class="mark">Victoria is the largest contributor to that interest bill relative to its size.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEN VS NOW -->
+<section id="history">
+  <div class="sec-head"><span class="no">02</span><h2>Victoria's debt under each government</h2><span class="kick">Net debt from the Cain government's first year to the 2029-30 forecast, shaded by the government in office. Switch between share of the economy, today's dollars and dollars at the time.</span></div>
+  <div class="stack">
+    <div class="card">
+      <div class="tabs" role="group" aria-label="Measure"><button type="button" id="lc-pct" aria-pressed="true">% of GSP</button><button type="button" id="lc-real" aria-pressed="false">Today's dollars</button><button type="button" id="lc-nom" aria-pressed="false">Dollars at the time</button></div>
+      <div id="linechart" role="img" aria-label="Line chart of Victoria's net debt from 1982 to 2030, shaded by government"></div>
+      <div class="legend" style="margin-top:8px"><span><span class="sw" style="background:var(--lab)"></span>Labor government</span><span><span class="sw" style="background:var(--coa)"></span>Coalition government</span><span><span class="sw" style="background:repeating-linear-gradient(45deg,var(--rule) 0 3px,transparent 3px 6px)"></span>Budget forecast</span></div>
+      <p class="chart-cap">1983 to 1992 use the broad public sector measure (1983 dollars from a secondary source, 1988 and 1992 shares from the 1993 Commission of Audit and Treasury data). The 1983 share of GSP (about 19%, dashed) is a rough estimate: no official figure is published, so it divides that 1983 debt figure by a GSP of about $49B, worked back from ABS income-based GSP for 1985-86 ($68.5B, Victorian Year Book 1993) using the yearly growth rates in Commonwealth Budget Paper No. 4, 1988-89. Treat it as a guide to the starting level only; later points are general government net debt at June each year. "Today's dollars" converts each year using ABS consumer price index figures (prices are about 2.5 times their 1992 level); forecast years assume 2.5% inflation. Points are published figures and the line joins them; the 2017 dollar figure and 2020 share are estimates from published ratios. Hover or tap a point for its value.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3><span class="t">✔</span> Kennett, 1992–99</h3><p class="pp">Cut debt from about a third of GSP to 3.3%, helped by about $30B of asset sales and deep spending cuts.</p>
+        <p class="pp" style="margin-top:8px"><span class="x">✘</span> <b>The catch:</b> the state gave up its big income-earning assets for good. Their steady, long-term returns now go to private owners, many overseas, in exchange for a one-off debt cut. Since 2010 that cut has been more than reversed, and there is nothing similar left to sell.</p></div>
+      <div class="card"><h3><span class="t">✔</span> Bracks–Brumby, 1999–2010</h3><p class="pp">Kept debt roughly flat against the economy; it fell to a low of $2.3B in 2008 before rising with the GFC.</p></div>
+      <div class="card"><h3><span class="x">✘</span> Since 2010</h3><p class="pp">Debt rose under Baillieu–Napthine (about $3.3B a year) and far faster under Andrews–Allan–Carroll (about $11.6B a year), driven by the Big Build, COVID and recurring deficits.</p>
+        <p class="pp" style="margin-top:8px"><span class="x">✘</span> <span class="mark"><b>Borrowing to pay day-to-day bills is the worst kind of debt</b></span>, like putting the groceries on a credit card. The Auditor-General found operating losses totalling <b>$50.6B over the six years</b> to 2024-25: borrowing that bought no lasting asset.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="then-now">
+  <div class="sec-head"><span class="no">03</span><h2><span class="mark">Back where we started, with less to sell</span></h2></div>
+  <div class="stack">
+    <p>In 1992 Victoria's public sector debt was about a third of GSP. Today <span class="tip" tabindex="0" data-tip="NFPS: core government plus state-owned businesses. The measure closest to the debt figures used in 1992.">NFPS</span> net debt is about 30% of GSP. The ratio is roughly the same, <span class="mark">but every other part of the position is weaker than in 1992.</span></p>
+    <div class="vs">
+      <div class="then"><div class="yr">1992 · in today's dollars</div><div class="amt num">$78B</div><div class="sub">$32B at the time · about $17,500 per Victorian · 4.5M people</div></div>
+      <div class="now"><div class="yr">2026-27 · NFPS net debt</div><div class="amt num" style="color:var(--bad)">$215B</div><div class="sub">2.7× larger after inflation · about $30,000 per Victorian · 7.15M people</div></div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h3>Why it's worse than the ratio suggests</h3>
+        <ul class="marks">
+          <li><span class="x">✘</span><span><b>The debt is far larger:</b> nearly three times as much after inflation, and about 1.7 times as much per Victorian.</span></li>
+          <li><span class="x">✘</span><span><b>It was built in good times:</b> the 1992 debt hit at the bottom of a deep recession with unemployment over 11%. Today's was reached during years of growth and record-low interest rates.</span></li>
+          <li><span class="x">✘</span><span><b>The big assets have already been sold or leased</b>, and what remains would cover only about 10 to 20% of today's debt.</span></li>
+          <li><span class="x">✘</span><span><b>Nothing stops it happening again:</b> Victoria has no legally binding limit on debt. Its own targets have been reset several times since 2020.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Income-earning assets already sold or leased</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Asset</th><th>When, by whom</th><th>Raised</th><th>Who earns the income now</th></tr></thead>
+          <tbody>
+            <tr><td><span class="x">✘</span> Electricity: power stations, poles and wires, retail</td><td>1993–99, Kennett (Kirner began with Loy Yang B in 1992)</td><td class="n">$20–23.5B</td><td>Networks: Jemena (China's State Grid and Singapore Power), CitiPower/Powercor (Hong Kong's CKI group), AusNet (Canada's Brookfield)</td></tr>
+            <tr><td><span class="x">✘</span> Gas pipelines and retail</td><td>Late 1990s, Kennett</td><td class="n">about $6B</td><td>Distribution: Multinet and Australian Gas Networks (AGIG, part of Hong Kong's CK group), AusNet gas (Canada's Brookfield). Main transmission pipeline: APA Group (ASX-listed)</td></tr>
+            <tr><td><span class="x">✘</span> TAB</td><td>1994, Kennett</td><td>Part of 1990s sales</td><td>Tabcorp (listed company)</td></tr>
+            <tr><td><span class="x">✘</span> Port of Melbourne (50-year lease)</td><td>2016, Andrews</td><td class="n">$9.7B</td><td>Lonsdale consortium: QIC, the Future Fund, Canada's OMERS, Global Infrastructure Partners</td></tr>
+            <tr><td><span class="x">✘</span> Land titles office (40-year lease)</td><td>2018, Andrews</td><td class="n">$2.86B</td><td>Private operator</td></tr>
+            <tr><td><span class="x">✘</span> VicRoads registration and licensing (40 years)</td><td>2022, Andrews</td><td class="n">$7.9B</td><td>Aware Super, Australian Retirement Trust and Macquarie</td></tr>
+            <tr><td>Trains and trams</td><td>Franchised 1999, not sold</td><td>—</td><td>State still owns them</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="margin-top:10px">What remains (water corporations, rail land, housing land) might raise an estimated $20–40B. Each sale also gives up future income.</p>
+      </div>
+      <div class="card">
+        <h3>What was the income worth?</h3>
+        <div class="grid3">
+          <div><div class="bign">$3.3B</div><p class="pp">A year Victorians now pay the private owners of the five electricity distribution networks (regulator-approved revenue for 2026–31, up from $2.4B a year in 2021–26). A guaranteed return on the owners' capital is built into that charge.</p></div>
+          <div><div class="bign" style="color:var(--warn)">$1.4B</div><p class="pp">About the yearly return on capital built into those charges: the rate of return makes up about 42% of network revenue. It pays the owners' lenders and shareholders, so it is not all profit, but in public hands it would have been income to the state.</p></div>
+          <div><div class="bign" style="color:var(--good)">$2–3B</div><p class="pp">Rough estimate of the interest saved each year in the late 1990s, when about $30B of sale proceeds paid off debt at interest rates of 7–10%.</p></div>
+        </div>
+        <div class="bottom good" style="margin-top:12px;font-size:16px"><span class="tag">How the regulated return works</span>The Australian Energy Regulator caps the return on the money invested in the networks (the "rate of return"), resetting it every five years in line with interest rates: <b>9.7%</b> in 2011–15, <b>6.1%</b> in 2016–20 and <b>4.7%</b> in 2021–26. On top of that, owners recover depreciation and running costs, can earn bonuses for beating cost and reliability targets, and every dollar of approved new capital spending is added to the asset base and earns the same return for decades. So the profit is capped and steady rather than large, which is exactly what makes it a reliable income stream.</div>
+        <p class="pp" style="margin-top:12px"><b>The balance:</b> at the time, the interest saved was worth more than the income given up, and the state shed the commercial risk of running power stations. But network income grows with the population and is guaranteed by regulation, while the debt saving was a one-off that later governments have since spent. <span class="mark">Keeping the monopoly networks and putting their income toward debt would very likely have left Victoria better off today.</span> The interest saving is an estimate; the network figures are from the regulator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEBT RULES -->
+<section id="rules">
+  <div class="sec-head"><span class="no">04</span><h2>Can debt be locked down?</h2></div>
+  <div class="stack">
+    <p>Most debt rules overseas have been bent or broken. The one that has held is written into a constitution and makes governments repay any breach.</p>
+    <details class="acc">
+      <summary><span><span class="sh">Do debt rules actually work? A reality check</span><span class="ss">One clear success (Switzerland), several partial ones, and a few that fail by design.</span></span><span class="chev"><span class="o">Show detail +</span><span class="c">Hide −</span></span></summary>
+      <div class="inner">
+        <div class="tbl"><table>
+          <thead><tr><th>Option</th><th>Works?</th><th>What happened</th></tr></thead>
+          <tbody>
+            <tr><td><b>Dollar debt ceiling</b> (US federal)</td><td><span class="verdict v-no">No</span></td><td>Set by the same Congress that approves the spending. Raised, extended or redefined 78 times since 1960.</td></tr>
+            <tr><td><b>Constitutional debt brake</b> (Switzerland)</td><td><span class="verdict v-yes">Yes</span></td><td>Approved by 85% of voters in 2001. Federal debt fell about CHF 27 billion from 2003 to 2019; overruns must be repaid in later years.</td></tr>
+            <tr><td><b>Constitutional debt brake</b> (Germany)</td><td><span class="verdict v-part">Partly</span></td><td>Held for years, then in March 2025 a two-thirds vote exempted defence spending above 1% of GDP and created a €500 billion infrastructure fund.</td></tr>
+            <tr><td><b>Balanced budget rules</b> (US states)</td><td><span class="verdict v-part">Partly</span></td><td>Operating budgets mostly balanced, but some states underfunded pensions instead: debt by another name.</td></tr>
+            <tr><td><b>Independent fiscal council</b> (UK, Ireland)</td><td><span class="verdict v-no">Not alone</span></td><td>Makes forecasts more honest; cannot stop borrowing. Victoria already has a Parliamentary Budget Office.</td></tr>
+            <tr><td><b>Asset-sale proceeds to debt</b></td><td><span class="verdict v-no">Wrong question</span></td><td>A sale is a one-off that trades permanent income for a single debt cut. Monopoly assets are usually better kept, with their returns applied to debt.</td></tr>
+            <tr><td><b>Borrow only for infrastructure</b> ("golden rule")</td><td><span class="verdict v-no">No</span></td><td>Victoria effectively runs this now: an operating surplus while net debt climbs from $175.6B to $199.3B. The UK's version was reinterpreted along the way and abandoned in the 2008 financial crisis.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </details>
+    <div class="bottom good"><span class="tag">What would make a rule stick</span>
+      <ol class="plain" style="margin-top:6px">
+        <li><b>Hard to change.</b> Victoria already requires a three-fifths majority in both houses to privatise water. A debt limit could be protected the same way, or by referendum.</li>
+        <li><b>A ratio on the broadest base.</b> A debt-to-GSP limit on the whole public sector, including private-partnership contracts.</li>
+        <li><b>Breaches must be repaid,</b> on a schedule written into law, as Switzerland requires.</li>
+        <li><b>Keep income-earning assets</b> and apply their dividends to debt; no sale without a special majority.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- TAX -->
+<section id="tax">
+  <div class="sec-head"><span class="no">05</span><h2>Tax</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag">Bottom line</span><span class="x">✘</span> Victoria collects more state tax as a share of its economy than any other state, leans hardest on property, and has added the most new property taxes since 2020. <span class="mark">It taxes the most and still borrows the most.</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>State taxes, % of GSP</h3>
+        <div class="bars" data-chart="tax"></div>
+        <p class="chart-cap">WA's figure is flattered by mining royalties, which are not counted as tax. NSW, a similar services economy, is the cleanest comparison: Victoria is 10% higher.</p>
+      </div>
+      <div class="card">
+        <h3>Property taxes: where Victoria stands apart</h3>
+        <div class="tbl"><table>
+          <tbody>
+            <tr><td>Land tax-free threshold</td><td class="bad">$50,000 (was $300,000)</td><td class="note">NSW $1,075,000; SA $936,000; Qld $600,000; WA $300,000; Tas $125,000</td></tr>
+            <tr><td>COVID debt levy</td><td class="bad">$500 + 0.1% for 10 years</td><td class="note">No other state</td></tr>
+            <tr><td>Vacant land tax</td><td class="bad">Statewide since 2025</td><td class="note">Not used this way elsewhere</td></tr>
+            <tr><td>Windfall gains tax</td><td class="bad">Since 2023</td><td class="note">No equivalent</td></tr>
+            <tr><td>Short-stay levy</td><td class="bad">7.5% since 2025</td><td class="note">No other state</td></tr>
+            <tr><td>Emergency services levy</td><td class="bad">Big rises for farms and business</td><td class="note">Others use insurance or the budget</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECONOMY -->
+<section id="economy">
+  <div class="sec-head"><span class="no">06</span><h2>Economy and jobs</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag">Bottom line</span><span class="x">✘</span> Victoria is growing its population quickly but not its output per person, and it now has the highest unemployment rate of any state.</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>GSP per person, change 2024-25</h3>
+        <div class="bars" data-chart="gsp"></div>
+        <p class="chart-cap">WA's fall reflects commodity prices. Victoria's is not a commodity effect: output grows more slowly than population.</p>
+      </div>
+      <div class="card">
+        <h3>Unemployment</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>State</th><th>Aug 2026</th><th>Feb 2026 (trend)</th></tr></thead>
+          <tbody>
+            <tr class="vic"><td>Victoria</td><td class="n">5.2% · highest</td><td class="n">4.6%</td></tr>
+            <tr><td>Tasmania</td><td class="n">5.0%</td><td class="n">4.5%</td></tr>
+            <tr><td>Queensland</td><td>—</td><td class="n">4.3%</td></tr>
+            <tr><td>WA</td><td>—</td><td class="n">4.1%</td></tr>
+            <tr><td>SA</td><td>—</td><td class="n">3.9%</td></tr>
+            <tr><td>NSW</td><td class="n">4.3% · lowest state</td><td class="n">4.0%</td></tr>
+            <tr><td>NT</td><td>—</td><td class="n">4.7%</td></tr>
+            <tr><td>ACT</td><td class="n">4.0% (trend)</td><td class="n">3.8%</td></tr>
+            <tr><td>Australia</td><td class="n">4.7% (Sep)</td><td></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <p>Victoria added <b>109,500 people</b> in the year to March 2026, more than any other state. Growth itself is not the problem; infrastructure, housing and services have not kept pace, and output per person is going backwards, so each new resident is not lifting the state's capacity to service its debt.</p>
+  </div>
+</section>
+
+<!-- HOUSING -->
+<section id="housing">
+  <div class="sec-head"><span class="no">07</span><h2>Housing</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag">Bottom line</span>Victoria still builds more homes per head than NSW, but its pipeline is shrinking while every other large state's grows. <span class="x">✘</span> It has the lowest share of social housing in the country and the highest rate of people seeking homelessness help.</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Social housing, % of all dwellings</h3>
+        <div class="bars" data-chart="social"></div>
+        <p class="chart-cap">About 55,600 households are on Victoria's waiting list.</p>
+      </div>
+      <div class="card">
+        <h3>New supply</h3>
+        <div class="tbl"><table>
+          <tbody>
+            <tr><td>Completed, 2025</td><td class="n">54,200</td><td class="note">Down 10%; target 80,000 a year</td></tr>
+            <tr><td>People per new home</td><td class="n">2.2</td><td class="note">NSW 2.3; Qld and WA worse</td></tr>
+            <tr><td>Approvals change, 2025-26</td><td class="bad n">−13.9%</td><td class="note">Qld +33.4%, NSW +13.2%, WA +10.7%</td></tr>
+            <tr><td>Under construction</td><td class="n">63,400</td><td class="note">NSW 78,600; Qld 52,600</td></tr>
+            <tr><td>Planning approval</td><td class="bad">Over 7 months, ~$20,000</td><td class="note">National 5.4 months, $14,100</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <ul class="marks">
+      <li><span class="x">✘</span><span>Victoria's homelessness services helped about 105,000 people in 2024-25: <span class="mark"><b>36% of the national total</b>, from a state with about 25% of the population.</span></span></li>
+      <li><span class="x">✘</span><span>That is about 149 clients per 10,000 people, against 106 nationally and 80 in NSW. Services could not provide long-term housing to about 95% of those who needed it.</span></li>
+      <li><span class="t">✔</span><span>Part of the high count reflects a larger service network (655 agencies against 344 in NSW), so not every gap is extra homelessness.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-head"><span class="no">08</span><h2>Health, education, safety</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag">Bottom line</span>Victoria's schools remain among the best in the country. Its emergency health services are weaker, and on crime it sits in the middle of the states: safer than Queensland and WA, less safe than NSW.</div>
+    <div class="tbl"><table>
+      <thead><tr><th>Area</th><th>Victoria</th><th>How it compares</th></tr></thead>
+      <tbody>
+        <tr><td>School results (NAPLAN)</td><td><span class="t">✔</span> Highest average scores of the states</td><td>ACT and NSW close behind; a genuine strength</td></tr>
+        <tr><td>Ambulance: Code 1 within 15 min</td><td class="bad"><span class="x">✘</span> About 64% (target 85%)</td><td>Missed its own target since 2020; regional areas far worse</td></tr>
+        <tr><td>Triple zero answer times</td><td class="bad"><span class="x">✘</span> Worst in the country in 2021-22</td><td>Delays linked to 33 deaths during the Omicron wave; later improved</td></tr>
+        <tr><td>Frontline vs head office</td><td class="bad"><span class="x">✘</span> Big rise in public service since 2014</td><td>Most growth in head office and policy roles rather than frontline staff</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Crime compared with other states</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>State</th><th>Assaulted or threatened</th><th>Home broken into</th><th>Car stolen</th></tr></thead>
+          <tbody>
+            <tr><td>NSW</td><td class="n">2.9%</td><td class="n">1.5%</td><td class="n">0.5%</td></tr>
+            <tr class="vic"><td>Victoria</td><td class="n">3.5%</td><td class="n">1.9%</td><td class="n">0.8% · highest</td></tr>
+            <tr><td>SA</td><td class="n">3.6%</td><td class="n">1.4%</td><td class="n">0.3%</td></tr>
+            <tr><td>WA</td><td class="n">3.9%</td><td>—</td><td>—</td></tr>
+            <tr><td>Queensland</td><td class="n">4.4%</td><td class="n">2.5%</td><td class="n">0.7%</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note" style="margin-top:8px">Share of people (assault) or households (break-in, car theft) affected each year, ABS Crime Victimisation survey, 2023-25 average. Surveys count crimes whether or not they were reported, so they compare fairly across states.</p>
+      </div>
+      <div class="card">
+        <h3>The trend in Victoria</h3>
+        <ul class="marks">
+          <li><span class="x">✘</span><span><b>Recorded offences</b> reached about 8,890 per 100,000 people in the year to December 2025, the clearest rise of any state.</span></li>
+          <li><span class="x">✘</span><span><b>Car theft</b> rose sharply in Victoria and NSW while it fell in most other states.</span></li>
+          <li><span class="t">✔</span><span><b>Assault</b> rates are below Queensland, WA and SA in the victim survey.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY -->
+<section id="energy">
+  <div class="sec-head"><span class="no">09</span><h2>Energy</h2></div>
+  <div class="stack">
+    <div class="bottom good"><span class="tag">Bottom line</span><span class="t">✔</span> Victorian households pay the lowest regulated power prices on the east coast. In plain terms, that saves a typical household about <b>$6 to $19 a week</b> compared with other states' default offers. Welcome, but small: not enough to change most household budgets. By comparison, the state spends about $24 million every day on interest, money that cannot go to hospitals, schools or lower power bills.</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Default electricity offer, typical household, 2026-27</h3>
+        <div class="bars" data-chart="power"></div>
+        <p class="chart-cap">Victoria vs Sydney: about $6 a week cheaper. Vs regional NSW: about $19 a week. Offers are calculated differently, so gaps are indicative.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark">Why it may not last</span></h3>
+        <ul class="marks">
+          <li><span class="x">✘</span><span><b>Coal closures:</b> Yallourn (2028) and Loy Yang A (2035) close under confidential deals that leave taxpayers carrying part of the cost.</span></li>
+          <li><span class="x">✘</span><span><b>Gas:</b> Bass Strait is running down; winter shortfalls are expected from about 2028. NSW and Queensland are less exposed.</span></li>
+          <li><span class="t">✔</span><span><b>Transmission:</b> new lines (VNI West and the offshore wind links) are paid for mainly through network charges on power bills over time, rather than by adding to state debt.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRITY -->
+<section id="integrity">
+  <div class="sec-head"><span class="no">10</span><h2>Government and integrity</h2></div>
+  <div class="stack">
+    <div class="bottom"><span class="tag">Bottom line</span><span class="mark">Victoria has run the largest state infrastructure program in Australia, with the <span class="x">✘</span> largest cost overruns, and its <span class="x">✘</span> anti-corruption body has weaker powers than its NSW counterpart.</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Project</th><th>First figure</th><th>Latest</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Metro Tunnel</td><td class="n">$10.9B (2016)</td><td class="bad n">$13.48B</td><td>Opened 2025</td></tr>
+        <tr><td>North East Link</td><td class="n">$10B (2016); $15.8B (2017 business case)</td><td class="bad n">$26.1B</td><td>Under construction</td></tr>
+        <tr><td>West Gate Tunnel</td><td class="n">$5.5B</td><td class="bad n">$10.2B</td><td>Opened 2025</td></tr>
+        <tr><td>Suburban Rail Loop (stage 1)</td><td class="n">$30–34.5B</td><td class="bad">$35B+ stage 1; full loop over $200B</td><td>Under construction</td></tr>
+        <tr><td>Commonwealth Games 2026</td><td class="n">$2.6B</td><td class="bad">Cancelled: $589M total, incl. $380M compensation</td><td>No event</td></tr>
+        <tr><td>East West Link</td><td>—</td><td class="bad">$1.1B to cancel (partly offset by ~$320M property sales)</td><td>Nothing built</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Anti-corruption powers</h3>
+        <div class="tbl"><table>
+          <thead><tr><th></th><th>Vic (IBAC)</th><th>NSW (ICAC)</th></tr></thead>
+          <tbody>
+            <tr><td>Public hearings</td><td class="bad">Only if exceptional circumstances, public interest and no unreasonable damage to reputations</td><td>When in the public interest</td></tr>
+            <tr><td>How often</td><td class="bad">8 public hearings, 2012-13 to 2019-20</td><td>42 in the same period</td></tr>
+            <tr><td>Record</td><td class="bad">Findings, few prosecutions</td><td>Findings against premiers and ministers</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="card">
+        <p>Other states have overruns too (Sydney Metro West, Snowy 2.0, Cross River Rail), so the problem is not unique to Victoria. What stands out is the scale relative to the state economy. East West Link shows both sides share blame: the auditor found the Coalition rushed to sign before the 2014 election and Labor then paid to cancel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <div class="sec-head"><span class="no">11</span><h2>What the comparison shows</h2></div>
+  <div class="stack">
+    <div class="grid2">
+      <div class="card" style="border-top:5px solid var(--good)">
+        <h3>Where Victoria does well</h3>
+        <ul class="marks">
+          <li><span class="t">✔</span><span><b>Schools:</b> top NAPLAN results among the states.</span></li>
+          <li><span class="t">✔</span><span><b>Power prices today:</b> slightly cheaper than other east-coast states (about $6 to $19 a week), and at risk as coal closes.</span></li>
+          <li><span class="t">✔</span><span><b>Housing completions:</b> long record of out-building NSW per head.</span></li>
+          <li><span class="t">✔</span><span><b>Attracting people:</b> largest population increase of any state.</span></li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:5px solid var(--bad)">
+        <h3><span class="mark">Where Victoria lags</span></h3>
+        <ul class="marks">
+          <li><span class="x">✘</span><span><b>Debt:</b> highest of any state on both main measures. Interest is $8.9B a year and rising; even if every government from 2032 balanced its books, debt would not fall back to 1999 levels (about 4% of GSP) until around 2070.</span></li>
+          <li><span class="x">✘</span><span><b>Tax:</b> highest burden, most property taxes, lowest land tax threshold.</span></li>
+          <li><span class="x">✘</span><span><b>Jobs:</b> highest unemployment; output per person falling.</span></li>
+          <li><span class="x">✘</span><span><b>Housing:</b> only large state with falling approvals; least social housing.</span></li>
+          <li><span class="x">✘</span><span><b>Credit rating:</b> in the lowest S&amp;P tier.</span></li>
+          <li><span class="x">✘</span><span><b>Integrity:</b> weaker anti-corruption powers; largest overruns.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom"><span class="tag">The connecting thread</span>High debt pushes up interest, which pushes up tax; high property taxes discourage housing investment; weaker supply raises rents and homelessness; and slow growth in output per person leaves each Victorian less able to carry the debt. NSW shows a large services-based state can run lower debt and lower tax at the same time. <span class="w">⚠</span> Queensland, SA and Tasmania are heading the same way on borrowing, but <span class="x">✘</span> Victoria has the least room of any large state to absorb a downturn or an interest rate rise.</div>
+  </div>
+</section>
+
+<!-- ELECTION -->
+<section id="election">
+  <div class="sec-head"><span class="no">12</span><h2>The 28 November election: what's on offer</h2><span class="kick">The parties' own policies on debt, services, cost of living and public housing, as announced and reported up to 18 November 2026. This page does not recommend a vote.</span></div>
+  <div class="stack">
+    <div class="grid2">
+      <div class="card">
+        <h3>Where the race stands</h3>
+        <ul class="marks">
+          <li><span>•</span><span>Late polls have the Liberal–National Coalition ahead of Labor; Newspoll put the gap at 10 points two-party preferred.</span></li>
+          <li><span>•</span><span>The Coalition needs about 16 more seats for a majority, so a hung parliament is possible.</span></li>
+          <li><span>•</span><span>One Nation is polling strongly and could hold the balance of power if no party wins a majority.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Your two votes, and what each one does</h3>
+        <ul class="marks">
+          <li><span>1</span><span><b>Lower house (Legislative Assembly) decides who governs.</b> You vote in your local electorate, but the party that wins most of the 88 seats forms government. This is the vote for the direction of the state, including debt. Number <b>every</b> box in order of preference; a single "1" is informal and won't count.</span></li>
+          <li><span>2</span><span><b>Upper house (Legislative Council) decides what passes.</b> It reviews and can block or amend the government's bills, so it acts as the check on whoever wins. Crossbench parties often hold the balance here. New rules this year: number <b>at least 5</b> boxes above the line (parties) or at least 5 below the line (candidates), and your preferences go only where you put them.</span></li>
+          <li><span>3</span><span><b>The two votes can be different.</b> Many voters back the party they want governing in the lower house, then use the upper house to support a check they value, such as parties that insist on costings or on protecting services.</span></li>
+          <li><span>4</span><span><b>Where you rank the parties you like least still matters.</b> If your first choice can't win, your vote flows on in the order you set.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tbl"><table class="pp">
+      <thead><tr><th>Party and leader</th><th>Debt</th><th>Transport</th><th>Health and education</th><th>Cost of living and tax</th><th>Public housing</th><th>Costings</th></tr></thead>
+      <tbody>
+        <tr><td><b>Labor</b><br>Ben Carroll</td><td>Reduce debt; no surplus target. Trim $2B from the Suburban Rail Loop, defer some level crossings.</td><td>Keep building the Suburban Rail Loop; fares capped at $30 a week for two years; kids travel free.</td><td>$1B plan to halve surgery waiting lists; free public dental clinics; $5.5B new school funding in the 2026-27 budget.</td><td>Lift the land tax threshold back to $300,000 by 2033; keeps the budget's public transport and car rego discounts.</td><td>$860M fund for 7,000 social homes over 10 years; redevelop the 44 public housing towers.</td><td>Full 2026 costings not found at time of writing; check before polling day.</td></tr>
+        <tr><td><b>Liberal–National Coalition</b><br>Jess Wilson (Lib), Danny O'Brien (Nat)</td><td>Cash surplus by 2032; freeze back-office hiring; pause and review the Suburban Rail Loop.</td><td>$5B more for roads over four years; 25% of infrastructure spending in regional Victoria.</td><td>$1.27B to halve surgery waits using private hospitals; 3,000 extra police.</td><td>Scrap the emergency services levy expansion and short-stay levy; cut land tax and first-home stamp duty; costed by the party at about $5B.</td><td>No social housing build target found; release unused government land; scrap high-rise activity centres in the suburbs.</td><td>Says its costings were checked by the Parliamentary Budget Office; full figures not yet published at time of writing.</td></tr>
+        <tr><td><b>Greens</b><br>Ellen Sandell</td><td>No debt reduction plan; $18B of new taxes on banks, gambling, fossil fuel firms and developers to fund new spending.</td><td>Permanently free public transport; trams every 10 minutes.</td><td>Health-led approach to crime; services funded from new taxes.</td><td>Rent caps; $350M trial of 10 state-owned supermarkets.</td><td>Build 88,000 public homes; keep the towers.</td><td>No full costing found.</td></tr>
+        <tr><td><b>One Nation</b><br>Warren Pickering</td><td>Promises "open books" and a real-time public spending website.</td><td>—</td><td>—</td><td>—</td><td>Community consultation before high-rise in established suburbs.</td><td class="bad">Has said it will not publish costings or use the Parliamentary Budget Office.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>The trade-offs in plain terms</h3>
+        <ul class="marks">
+          <li><span class="w">⚠</span><span><b>Debt vs services:</b> stopping debt growth means spending less; more services and public housing mean spending more or taxing more. No party offers both.</span></li>
+          <li><span class="w">⚠</span><span><b>Tax cuts vs debt:</b> every dollar of tax cut has to be found in spending cuts before any debt is repaid.</span></li>
+          <li><span class="w">⚠</span><span><b>Even the best case is slow:</b> stopping new borrowing from 2032 would bring debt back to 1999 levels (about 4% of GSP) only around 2070, as the economy grows.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Questions to test any promise</h3>
+        <ol class="plain">
+          <li>Are the costings published and independently checked before polling day?</li>
+          <li>Are savings named (projects, staff numbers, dates) or vague?</li>
+          <li>Is there a dated debt or surplus target you can hold them to?</li>
+          <li>Is every tax cut matched by a named saving?</li>
+          <li>What did this party do with debt the last time it governed? (See the chart above.)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="sources">
+  <div class="wrap stack">
+    <div class="legend"><span><span class="x">✘</span> weakness</span><span><span class="t">✔</span> strength</span><span><span class="w">⚠</span> warning</span><span><span class="mark">highlight</span> key point</span></div>
+    <p class="note">Comparisons focus on the six states. NFPS net debt includes state-owned businesses; general government does not. Per-household figures use 2026-27 budget net debt, ABS population (March 2026) and 2021 Census household size, so treat them as approximate. Tasmania's 2026-27 debt is an estimate. 1992 conversions use the ABS consumer price index (prices are about 2.5 times their 1992 level). The remaining-asset value is an estimate. This page is analysis, not financial advice.</p>
+    <details class="acc">
+      <summary><span><span class="sh">Sources</span><span class="ss">Budget papers, ABS, auditors-general, regulators and news reports</span></span><span class="chev"><span class="o">Show +</span><span class="c">Hide −</span></span></summary>
+      <div class="inner cols" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
+        <div>
+          <h3>Public finances</h3>
+          <ul>
+            <li><a href="https://www.dtf.vic.gov.au/state-budget">Victorian Budget 2026-27</a></li>
+            <li><a href="https://www.sheppnews.com.au/?p=308679">Victorian budget snapshot (AAP)</a></li>
+            <li><a href="https://michaelwest.com.au/?p=449404">NSW 2026-27 budget (AAP)</a></li>
+            <li><a href="https://budget.qld.gov.au/budget-snapshot/economic-and-fiscal-outlook/">Queensland Budget 2026-27</a></li>
+            <li><a href="https://statebudget.sa.gov.au/our-budget/budget-overview">SA Budget 2026-27</a></li>
+            <li><a href="https://pulsetasmania.com.au/news/tasmania-budget-net-debt-to-hit-10b-1700-public-sector-jobs-to-go/">Tasmanian budget (Pulse Tasmania)</a></li>
+            <li><a href="https://www.macrobusiness.com.au/2026/07/victoria-faces-severe-debt%e2%80%91affordability-crunch/">MacroBusiness: Victoria's debt crunch</a></li>
+            <li><a href="https://www.aap.com.au/factcheck/victorian-liberal-leaders-figures-on-public-debt-add-up">AAP FactCheck (2022)</a></li>
+            <li><a href="https://www.dtf.vic.gov.au/sites/default/files/2024-10/state-budget-treasurers-speech-1999-2000.pdf">Treasurer's Speech 1999-2000</a></li>
+            <li><a href="https://www.premier.vic.gov.au/promise-delivered-port-of-melbourne-leased-to-remove-level-crossings-and-create-thousands-of-jobs">Port of Melbourne lease</a> · <a href="https://www.minterellison.com/articles/commercialisation-of-the-victorian-land-titles-office">Land titles lease</a></li>
+            <li>NAB state budget review (July 2026); IPA state rankings (June 2025); S&amp;P Global Ratings</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Debt rules</h3>
+          <ul>
+            <li><a href="https://www.efv.admin.ch/efv/en/home/aktuell/a/schuldenbremse.html">Swiss Federal Finance Administration: debt brake</a></li>
+            <li><a href="https://www.cato.org/sites/cato.org/files/pubs/pdf/tbb-81-updated.pdf">US debt limit history (citing US Treasury)</a></li>
+            <li><a href="https://www.courthousenews.com/german-parliament-passes-huge-rearmament-infrastructure-package/">Germany's 2025 debt brake reform</a></li>
+            <li><a href="https://www.instituteforgovernment.org.uk/explainer/fiscal-rules-history">Institute for Government: UK fiscal rules</a></li>
+            <li><a href="https://www.auspublaw.org/blog/2023/11/constitutional-puffery-the-protection-of-sydney-water-in-the-nsw-constitution">AUSPUBLAW: water entrenchment</a></li>
+          </ul>
+          <h3 style="margin-top:14px">Tax</h3>
+          <ul>
+            <li><a href="https://www.richify.ai/au/tools/land-tax-calculator">Land tax thresholds by state (2026)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Economy, housing, safety</h3>
+          <ul>
+            <li><a href="https://www.abs.gov.au/media-centre/media-releases/australias-population-grows-14-march-2026">ABS: population, March 2026</a></li>
+            <li><a href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia">ABS: Labour Force</a></li>
+            <li><a href="https://www.abs.gov.au/statistics/people/crime-and-justice/crime-victimisation/latest-release">ABS: Crime Victimisation 2024-25</a></li>
+            <li><a href="https://www.securitywholesalers.com.au/?p=148579">Victorian recorded offence rate, 2025</a></li>
+            <li><a href="https://www.theadviser.com.au/borrower/48742-housing-approvals-lift-yet-accord-shortfall-deepens">The Adviser: housing approvals</a></li>
+            <li><a href="https://www.propertycouncil.com.au/media-releases/new-housing-figures-show-victoria-falling-behind-new-south-wales">Property Council: Victorian completions</a></li>
+            <li><a href="https://www.aihw.gov.au/getmedia/2f8608e1-8398-4a16-861c-7008aa2a5593/hou343_factsheets_2024-25_vic.pdf">AIHW: homelessness, Victoria 2024-25</a></li>
+            <li><a href="https://www.pc.gov.au/ongoing/report-on-government-services">Productivity Commission: ROGS 2026</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Services, energy, integrity</h3>
+          <ul>
+            <li><a href="https://vic.nationals.org.au/media-releases/melina-bath-mp-ambulance-service-continues-to-decline-under-labor/">Ambulance response data</a></li>
+            <li><a href="https://www.acara.edu.au/">ACARA: NAPLAN</a></li>
+            <li><a href="https://www.esc.vic.gov.au/">Essential Services Commission: VDO</a> · <a href="https://www.aer.gov.au/">AER: DMO</a></li>
+            <li><a href="https://www.canberratimes.com.au/story/8460923/project-blowout-on-north-east-link-to-cost-26-billion/">North East Link cost ($26.1B)</a></li>
+            <li><a href="https://www.audit.vic.gov.au/node/34599">VAGO: Withdrawal from the 2026 Commonwealth Games</a></li>
+            <li><a href="https://www.audit.vic.gov.au//node/35301">VAGO: 2024-25 state finances ($50.6B operating losses)</a></li>
+            <li><a href="https://www.premier.vic.gov.au/strong-base-build-victorias-economic-recovery">Net debt June 2021</a> · <a href="https://www.dtf.vic.gov.au/sites/default/files/2024-10/2019-20-Financial-Report.pdf">2019-20 Financial Report</a> · <a href="https://www.smartcompany.com.au/?p=346757">Net debt ratios 2014–2022</a></li>
+            <li><a href="https://www.thenewdaily.com.au/news/2015/12/09/1-1-billion-scrap-east-west-link/">VAGO: East West Link ($1.1B)</a></li>
+            <li><a href="https://ibac.vic.gov.au/ibac-examinations">IBAC: public examinations test</a> · <a href="https://justinian.com.au/exceptional-circumstances/">IBAC vs ICAC hearings</a></li>
+            <li><a href="https://www.pm.gov.au/media/meeting-national-cabinet-11">National Cabinet: current premiers</a></li>
+          </ul>
+          <h3 style="margin-top:14px">Other states' borrowing</h3>
+          <ul>
+            <li><a href="https://secnewgate.com.au/?p=8936">Queensland 2026-27 budget update</a> · <a href="https://www.indailyqld.com.au/news/just-in/2026/06/23/your-guide-to-the-qld-budget">Treasurer on debt</a></li>
+            <li><a href="https://statebudget.sa.gov.au/our-budget/budget">SA budget: why net debt rises</a> · <a href="https://www.indailysa.com.au/news/opinion/2026/06/23/why-state-government-debt-matters-to-struggling-households">SA interest costs</a></li>
+            <li><a href="https://www.southernriverinanews.com.au/national/island-state-to-cut-cut-cut-its-way-back-to-the-black/">Tasmanian budget (AAP)</a> · <a href="https://pulsetasmania.com.au/news/tasmania-budget-net-debt-to-hit-10b-1700-public-sector-jobs-to-go/">Pulse Tasmania</a></li>
+          </ul>
+          <h3 style="margin-top:14px">Election</h3>
+          <ul>
+            <li><a href="https://www.vec.vic.gov.au/about-us/legislation/electoral-act-amendments-2026">VEC: new upper house voting rules</a></li>
+            <li><a href="https://www.aer.gov.au/news/articles/news-releases/final-revenue-decisions-victorian-networks-support-targeted-investment-and-consumer-needs">AER: Victorian network revenue 2026–31</a> · <a href="https://www.energynetworks.com.au/news/energy-insider/2021-energy-insider/a-victorian-energy-season-five-decisions-in-one-day/">2021–26 revenue</a></li>
+            <li><a href="https://www.aemc.gov.au/energy-rules/national-gas-rules/gas-scheme-register/vic-multinet-gas-distribution-network">AEMC: Multinet gas ownership</a> · <a href="https://assets.infrastructurevictoria.com.au/assets/Resources/Submissions/Australian-Gas-Infrastructure-Group.pdf">AGIG networks in Victoria</a></li>
+            <li><a href="https://www.pbo.gov.au/publications/2026-27-national-fiscal-outlook">PBO: 2026-27 National Fiscal Outlook (net debt per person)</a></li>
+            <li><a href="https://budget.nt.gov.au/papers/guide/territorys-budget-position">NT Budget 2026-27</a> · <a href="https://region.com.au/act-budget-were-staying-in-the-red-longer-and-the-return-to-surplus-has-been-pushed-back-another-year/972992/">ACT Budget 2026-27</a> · <a href="https://region.com.au/from-surplus-return-to-tax-reform-budget-promises-ring-hollow-says-analysis/979483/">ACT debt history</a></li>
+            <li><a href="https://population.gov.au/sites/population.gov.au/files/2026-03/nst-population-sep-2025.pdf">Centre for Population: NT and ACT growth</a></li>
+            <li><a href="https://energycouncil.com.au/rate-of-return-what-does-it-mean-for-consumers/">Energy Council: rate of return share of revenue</a> · AER rates of return <a href="https://www.aer.gov.au/system/files/AER%20-%20Final%20decision%20CitiPower%20distribution%20determination%20-%20Overview%20-%20May%202016.pdf">2016–20</a>, <a href="https://www.aer.gov.au/system/files/AER%20-%20Final%20decision%20-%20CitiPower%20distribution%20determination%202021%E2%80%9326%20-%20Overview%20-%20April%202021_0.pdf">2021–26</a>, <a href="https://www.aer.gov.au/system/files/Victorian%20distribution%20draft%20decision%202011-2015%20(June%202010).pdf">2011–15</a></li>
+            <li><a href="https://www.ato.gov.au/rates/consumer-price-index">ABS consumer price index (via ATO)</a> · <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jun-2026">ABS CPI June 2026</a></li>
+            <li><a href="https://thenightly.com.au/politics/poll-shows-victorian-opposition-leader-jess-wilson-favoured-to-become-states-premier-at-november-election-c-23069499">Newspoll (The Nightly)</a></li>
+            <li><a href="https://www.illawarramercury.com.au/story/9383583/is-borrowed-time-up-the-200-billion-election-question/">AAP: the $200 billion election question</a></li>
+            <li><a href="https://aapnews.aap.com.au/news/budget-busting-labor-casts-tax-cut-cost-stone-at-rivals">AAP: Coalition tax promises</a></li>
+            <li><a href="https://startsat60.com/media/health/election-pledges-yet-to-remedy-gaps-in-health-care">AAP: health pledges</a></li>
+            <li><a href="https://greens.org.au/vic/platform/a-z">Greens platform</a></li>
+            <li><a href="https://www.thenewdaily.com.au/news/state/vic/2026/11/02/one-nation-costings-secrecy">One Nation costings (AAP)</a></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</footer>
+
+<script>
+/* Bar charts */
+const DATA = {
+  household:{fmt:v=>"$"+v.toLocaleString("en-AU"),rows:[["Victoria",61400,1],["NSW",38800],["South Australia",36100],["Tasmania",31900],["Queensland",22300]]},
+  nfps:{fmt:v=>v.toFixed(1)+"%",rows:[["NT",30.8],["Victoria",30.2,1],["Tasmania",29.8],["South Australia",23.3],["ACT",21.9],["NSW",18.0],["Queensland",17.2],["WA",9.7]]},
+  tax:{fmt:v=>v.toFixed(2)+"%",rows:[["Victoria",6.11,1],["NSW",5.56],["Queensland",4.71],["South Australia",4.45],["Tasmania",4.16],["WA",3.24]]},
+  gsp:{fmt:v=>(v>0?"+":"−")+Math.abs(v).toFixed(2)+"%",diverge:true,rows:[["Tasmania",0.72],["Queensland",0.36],["South Australia",-0.15],["NSW",-0.33],["Victoria",-0.78,1],["WA",-1.06]]},
+  social:{fmt:v=>v.toFixed(1)+"%",rows:[["NT",13.8],["ACT",6.2],["Tasmania",6.2],["South Australia",5.7],["NSW",4.5],["Australia",4.0],["WA",3.8],["Queensland",3.5],["Victoria",3.0,1]]},
+  power:{fmt:v=>"$"+v.toLocaleString("en-AU"),good:true,rows:[["Victoria",1591,1],["Sydney (Ausgrid)",1899],["SE Qld (Energex)",1988],["NSW Endeavour",2328],["South Australia",2334],["Regional NSW",2604]]}
+};
+document.querySelectorAll("[data-chart]").forEach(el=>{
+  const d=DATA[el.dataset.chart]; if(!d) return;
+  const max=Math.max(...d.rows.map(r=>Math.abs(r[1])));
+  el.innerHTML=d.rows.map(([lab,v,hl])=>{
+    const w=(Math.abs(v)/max*100).toFixed(1);
+    const cls="bar"+(hl?" hl":"")+(hl&&d.good?" okay":"");
+    const col=(d.diverge&&v>0)?"background:var(--good)":"";
+    return `<div class="${cls}"><span class="lab">${lab}</span><span class="track"><span class="fill" style="width:${w}%;${col}"></span></span><span class="val">${d.fmt(v)}</span></div>`;
+  }).join("");
+});
+
+/* State-by-state matrix: columns NSW, Vic, Qld, SA, WA, Tas */
+const STATES=[["NSW","Labor · since 2023"],["Vic","Labor · since 2014"],["Qld","LNP · since 2024"],["SA","Labor · since 2022"],["WA","Labor · since 2017"],["Tas","Liberal · since 2014"],["NT","CLP · since 2024"],["ACT","Labor · since 2001"]];
+const VIC=1;
+const ROWS=[
+  {g:"Debt"},
+  {l:"Net debt, % of GSP (2026-27)",tip:"Non-financial public sector net debt divided by gross state product. Lower is better.",dir:"low",v:[18.0,30.2,17.2,23.3,9.7,29.8,30.8,21.9],f:v=>v.toFixed(1)+"%"},
+  {l:"Projected, % of GSP (2029-30)",tip:"Where each government's own budget says the ratio is heading. Lower is better.",dir:"low",v:[18.4,30.4,23.3,null,10.8,31.8,28.4,21.3],f:v=>v.toFixed(1)+"%"},
+  {l:"Debt trend",text:["Flat","Flat, highest state","⚠ Rising fast","⚠ Rising","Low","⚠ Rising","Falling slowly","⚠ Rising in dollars"],warn:[0,0,1,1,0,1,0,1]},
+  {l:"Net debt per person (approx.)",tip:"Net debt divided by population. States: general government 2026-27. NT: whole public sector. ACT: includes local council functions. The federal Parliamentary Budget Office also ranks the NT highest, then the ACT, then Victoria. Lower is better.",dir:"low",v:[14900,24500,8900,15000,null,13900,47900,25700],f:v=>"$"+(Math.round(v/100)/10)+"k"},
+  {l:"Credit rating (S&P)",tip:"A higher rating means cheaper borrowing. AAA is the top. The NT is rated by Moody's only.",dir:"high",v:[2,1,1,2,3,1,null,1],f:v=>["","AA","AA+","AAA"][v],na:[0,0,0,0,0,0,"Moody's only",0]},
+  {g:"Tax"},
+  {l:"State tax, % of GSP",tip:"All state taxes as a share of the economy. Lower is better. No comparable figure for the territories.",dir:"low",v:[5.56,6.11,4.71,4.45,3.24,4.16,null,null],f:v=>v.toFixed(2)+"%"},
+  {l:"Land tax-free threshold",tip:"Land value an individual can own (excluding the home) before land tax applies. Higher is better for owners. The NT has no land tax; the ACT taxes all rented homes with no threshold.",dir:"high",v:[1075000,50000,600000,936000,300000,125000,1e12,0],f:v=>v>=1e12?"No land tax":v===0?"$0 (rentals)":v>=1e6?"$"+(v/1e6).toFixed(3)+"M":"$"+(v/1000)+"k"},
+  {g:"Economy"},
+  {l:"Unemployment (trend, Feb 2026)",tip:"Lower is better. Victoria's seasonally adjusted rate was 5.2% in August 2026, the highest state.",dir:"low",v:[4.0,4.6,4.3,3.9,4.1,4.5,4.7,3.8],f:v=>v.toFixed(1)+"%"},
+  {l:"Output per person, change 2024-25",tip:"Change in gross state product per person. Higher is better.",dir:"high",v:[-0.33,-0.78,0.36,-0.15,-1.06,0.72,null,null],f:v=>(v>0?"+":"−")+Math.abs(v).toFixed(2)+"%"},
+  {l:"Population growth (year)",tip:"Year to March 2026; NT and ACT year to September 2025. Not ranked: growth is neither good nor bad on its own.",dir:null,v:[1.1,1.6,1.6,1.0,2.1,0.6,1.4,1.3],f:v=>v.toFixed(1)+"%"},
+  {g:"Housing"},
+  {l:"Dwelling approvals, change 2025-26",tip:"Approvals lead new homes by one to three years. Higher is better.",dir:"high",v:[13.2,-13.9,33.4,-11.5,10.7,-22.5,null,null],f:v=>(v>0?"+":"−")+Math.abs(v).toFixed(1)+"%"},
+  {l:"Social housing, % of dwellings",tip:"Public and community housing as a share of all homes. Higher means more support available.",dir:"high",v:[4.5,3.0,3.5,5.7,3.8,6.2,13.8,6.2],f:v=>v.toFixed(1)+"%"},
+  {g:"Safety"},
+  {l:"Assaulted or threatened (% of people)",tip:"ABS Crime Victimisation survey, 2023-25 average. Lower is better.",dir:"low",v:[2.9,3.5,4.4,3.6,3.9,null,null,null],f:v=>v.toFixed(1)+"%"},
+  {l:"Home broken into (% of households)",tip:"ABS Crime Victimisation survey, 2023-25 average. Lower is better.",dir:"low",v:[1.5,1.9,2.5,1.4,null,null,null,null],f:v=>v.toFixed(1)+"%"},
+  {g:"Energy"},
+  {l:"Default power bill, capital city",tip:"Regulated default offer for a typical household, 2026-27. Lower is better.",dir:"low",v:[1899,1591,1988,2334,null,null,null,null],f:v=>"$"+v.toLocaleString("en-AU")}
+];
+function tierOf(vals,i,dir){
+  const v=vals[i]; if(v==null||!dir) return "";
+  const xs=vals.filter(x=>x!=null);
+  const sorted=[...xs].sort((a,b)=>dir==="low"?a-b:b-a);
+  const best=sorted[0],worst=sorted[sorted.length-1];
+  const n=xs.length;
+  const rank=sorted.indexOf(v)+1;
+  if(v===best) return "c-best";
+  if(v===worst) return "c-worst";
+  if(n>=5&&rank===2) return "c-good";
+  if(n>=5&&rank===n-1) return "c-poor";
+  return "";
+}
+function rankOf(vals,i,dir){
+  const v=vals[i]; if(v==null||!dir) return "";
+  const xs=vals.filter(x=>x!=null);
+  const better=xs.filter(x=>dir==="low"?x<v:x>v).length;
+  const tied=xs.filter(x=>x===v).length>1;
+  return (tied?"=":"")+(better+1)+" of "+xs.length;
+}
+(function(){
+  const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  let h='<table class="matrix"><thead><tr><th>Measure</th>';
+  STATES.forEach(([s,g],i)=>{h+=`<th class="${i===VIC?"vcol":""}"><span class="st">${s}</span><span class="gov">${g}</span></th>`;});
+  h+='<th>Vic rank</th></tr></thead><tbody>';
+  ROWS.forEach(r=>{
+    if(r.g){h+=`<tr><td class="grp" colspan="10">${r.g}</td></tr>`;return;}
+    const lab=r.tip?`<span class="tip" tabindex="0" data-tip="${esc(r.tip)}">${r.l}</span>`:r.l;
+    h+=`<tr><td>${lab}</td>`;
+    if(r.text){
+      r.text.forEach((t,i)=>{h+=`<td class="${i===VIC?"vcol":""}">${r.warn[i]?`<span class="badge b-warn">${t}</span>`:t}</td>`;});
+      h+='<td></td></tr>';return;
+    }
+    r.v.forEach((v,i)=>{
+      const cls=["v",tierOf(r.v,i,r.dir),i===VIC?"vcol":""].join(" ");
+      h+=`<td class="${cls}">${v==null?((r.na&&r.na[i])||"—"):r.f(v)}</td>`;
+    });
+    h+=`<td class="rank">${rankOf(r.v,VIC,r.dir)}</td></tr>`;
+  });
+  h+='</tbody></table>';
+  document.getElementById("matrix").innerHTML=h;
+})();
+/* Debt line chart */
+const CPI={1983:35.3,1992:59.9,1999:68.5,2008:91.6,2010:95.8,2014:105.9,2017:110.7,2019:114.8,2020:114.4,2021:118.8,2022:126.1,2023:133.7,2025:141.7,2026:147.1};
+const PTS=[[1983,9.4,19],[1988,null,27.5],[1992,32,32],[1999,4.9,3.3],[2008,2.3,1.0],[2010,8.0,2.5],[2014,21.2,6.0],[2017,16.0,3.9],[2019,25.5,5.2],[2020,44.3,9.5],[2021,72.7,15.6],[2022,100.0,19.9],[2023,116.7,20.5],[2025,150.9,23.7],[2026,160.7,24.0],[2027,175.6,24.9,1],[2030,199.3,24.4,1]];
+const EST={1983:"pct"}; /* 1983 share of GSP is a rough estimate (see caption) */
+const BANDS=[[1982.3,1992.8,"Cain–Kirner","lab"],[1992.8,1999.8,"Kennett","coa"],[1999.8,2010.9,"Bracks–Brumby","lab"],[2010.9,2014.9,"Baillieu–Napthine","coa"],[2014.9,2026.5,"Andrews–Allan–Carroll","lab"]];
+function realVal(y,v){const c=CPI[y]; return c? v*CPI[2026]/c : v/Math.pow(1.025,y-2026);}
+function drawLC(mode){
+  const W=900,H=400,L=56,R=24,T=34,B=36,x0=1982,x1=2030;
+  const vals=PTS.map(p=>mode==="pct"?p[2]:(p[1]==null?null:(mode==="real"?realVal(p[0],p[1]):p[1])));
+  const ymax=mode==="pct"?35:220, step=mode==="pct"?5:40;
+  const X=y=>L+(y-x0)/(x1-x0)*(W-L-R), Y=v=>T+(1-v/ymax)*(H-T-B);
+  const fmt=v=>mode==="pct"?v.toFixed(v<10?1:0)+"%":"$"+(v<10?v.toFixed(1):Math.round(v))+"B";
+  let g=`<svg viewBox="0 0 ${W} ${H}"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="6" fill="var(--rule)"/></pattern></defs>`;
+  BANDS.forEach(([a,b,n,c])=>{g+=`<rect x="${X(a)}" y="${T}" width="${X(b)-X(a)}" height="${H-T-B}" fill="var(--${c})"/><text class="gov" x="${(X(a)+X(b))/2}" y="${T-12}" text-anchor="middle">${n}</text>`;});
+  g+=`<rect x="${X(2026.5)}" y="${T}" width="${X(x1)-X(2026.5)}" height="${H-T-B}" fill="url(#hatch)" opacity=".6"/><text class="gov" x="${(X(2026.5)+X(x1))/2}" y="${T-12}" text-anchor="middle">Forecast</text>`;
+  for(let v=0;v<=ymax;v+=step){g+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${mode==="pct"?v+"%":"$"+v+"B"}</text>`;}
+  [1982,1988,1992,1999,2005,2010,2014,2020,2026,2030].forEach(y=>{g+=`<text x="${X(y)}" y="${H-B+20}" text-anchor="middle">${y}</text>`;});
+  const idx=PTS.map((p,i)=>i).filter(i=>vals[i]!=null);
+  const pts=PTS.map((p,i)=>vals[i]==null?null:[X(p[0]),Y(vals[i]),p[3]]);
+  const isE=i=>EST[PTS[i][0]]===mode;
+  const act=idx.filter(i=>!PTS[i][3]&&!isE(i)).map(i=>pts[i]);
+  const est=idx.filter(i=>isE(i)).map(i=>pts[i]);
+  const fIdx=idx.filter(i=>PTS[i][3]); const lastA=idx.filter(i=>!PTS[i][3]).pop();
+  const fc=[pts[lastA],...fIdx.map(i=>pts[i])];
+  g+=`<path class="area" d="M${act[0][0]},${Y(0)} L${act.map(p=>p[0]+","+p[1]).join(" L")} L${act[act.length-1][0]},${Y(0)} Z"/>`;
+  g+=`<path class="ln" d="M${act.map(p=>p[0]+","+p[1]).join(" L")}"/><path class="lnf" d="M${fc.map(p=>p[0]+","+p[1]).join(" L")}"/>`;
+  if(est.length) g+=`<path class="lnf" d="M${[...est,act[0]].map(p=>p[0]+","+p[1]).join(" L")}"/>`;
+  idx.forEach(i=>{const p=PTS[i];const [x,y,f]=pts[i];const e=isE(i);const lab=`${p[0]}${f?" forecast":e?" rough estimate":""}: ${e?"about ":""}${fmt(vals[i])}`;g+=`<circle class="${f||e?"f":""}" cx="${x}" cy="${y}" r="5"></circle><circle class="hit" cx="${x}" cy="${y}" r="16" tabindex="0" data-x="${x}" data-y="${y}" data-t="${lab}" aria-label="${lab}"></circle>`;});
+  const yr=y=>PTS.findIndex(p=>p[0]===y);
+  [[1983,"start",-12],[1988,"middle",-12],[1992,"middle",-12],[1999,"middle",-12],[2008,"middle",20],[2014,"middle",-12],[2026,"end",-14],[2030,"end",-14]].forEach(([yy,anc,dy])=>{const i=yr(yy); if(i<0||vals[i]==null) return; const [x,y]=pts[i];g+=`<text class="vl" x="${anc==="end"?x-8:x}" y="${y+dy}" text-anchor="${anc}">${isE(i)?"about ":""}${fmt(vals[i])}${isE(i)?" (est.)":""}${yy===2030?" (2030)":yy===2026?" (2026)":""}</text>`;});
+  g+=`</svg>`;
+  document.getElementById("linechart").innerHTML=`<div class="lc">${g}<div class="lc-tip" id="lctip"></div></div>`;
+  const box=document.querySelector("#linechart .lc"), tip=document.getElementById("lctip"), svg=box.querySelector("svg");
+  const show=c=>{const sc=svg.getBoundingClientRect().width/W; tip.textContent=c.dataset.t; tip.style.left=(c.dataset.x*sc)+"px"; tip.style.top=(c.dataset.y*sc)+"px"; tip.classList.add("on");};
+  const hide=()=>tip.classList.remove("on");
+  box.querySelectorAll("circle.hit").forEach(c=>{c.addEventListener("mouseenter",()=>show(c));c.addEventListener("mouseleave",hide);c.addEventListener("focus",()=>show(c));c.addEventListener("blur",hide);c.addEventListener("click",()=>show(c));});
+  [["lc-pct","pct"],["lc-real","real"],["lc-nom","nom"]].forEach(([id,m])=>document.getElementById(id).setAttribute("aria-pressed",String(m===mode)));
+}
+document.getElementById("lc-pct").addEventListener("click",()=>drawLC("pct"));
+document.getElementById("lc-real").addEventListener("click",()=>drawLC("real"));
+document.getElementById("lc-nom").addEventListener("click",()=>drawLC("nom"));
+drawLC("pct");
+</script>
+</body>
+</html>
