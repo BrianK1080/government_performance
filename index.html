@@ -163,6 +163,22 @@ table.matrix .c-worst{background:var(--bad-soft);font-weight:700}
 table.matrix .vcol{box-shadow:inset 3px 0 0 var(--navy),inset -3px 0 0 var(--navy)}
 table.matrix thead .vcol{box-shadow:inset 3px 0 0 var(--navy),inset -3px 0 0 var(--navy),inset 0 3px 0 var(--navy)}
 table.matrix td.rank{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.mstack{display:none}
+@media (max-width:700px){.matrix-wrap{display:none}.mstack{display:grid;gap:12px}}
+.mstack h4{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.08em;color:var(--muted);margin:10px 0 0}
+.mm{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.mm-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:15px;font-weight:600;margin-bottom:8px}
+.mm-r{font-family:var(--mono);font-size:12.5px;white-space:nowrap;color:var(--muted)}
+.mm-l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:column;gap:4px 8px}
+.mm-l li{display:flex;justify-content:space-between;gap:6px;font-size:14px;padding:3px 8px;border-radius:5px;border:1px solid transparent}
+.mm-l li .v{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mm-l li.c-best{background:var(--good-soft)}.mm-l li.c-good{background:var(--good-fill)}.mm-l li.c-poor{background:var(--bad-fill)}.mm-l li.c-worst{background:var(--bad-soft);font-weight:700}
+.mm-l li.vic{border-color:var(--navy);font-weight:700}
+.mm-l.text{grid-auto-flow:row}
+.mm-l.text li{display:block}
+.mm-l.text li b{font-family:var(--display);margin-right:6px}
+.mm .nd{font-size:12.5px;color:var(--muted);margin-top:6px}
+.mstack .tip::after{left:0;transform:none;max-width:260px}
 .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);align-items:center}
 .sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--rule)}
 
@@ -335,7 +351,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
 
 <!-- STATE MATRIX -->
 <section id="states">
-  <div class="sec-head"><h2>State by state</h2><span class="kick">Each row is coloured from best to worst among the states and territories with data. Victoria's column is outlined. Hover or tap underlined terms for an explanation.</span></div>
+  <div class="sec-head"><h2>State by state</h2><span class="kick">Each row is coloured from best to worst among the states and territories with data. Victoria is outlined. Hover or tap underlined terms for an explanation.</span></div>
   <div class="stack">
     <div class="legend">
       <span><span class="sw" style="background:var(--good-soft)"></span>Best</span>
@@ -346,6 +362,7 @@ footer ul{margin:0;padding-left:18px;display:grid;gap:4px}
       <span><span class="badge b-warn">⚠</span> Debt rising fast</span>
     </div>
     <div class="matrix-wrap" id="matrix"></div>
+    <div class="mstack" id="matrix-m"></div>
     <p class="note">"—" means no comparable figure. Tap a measure's name for what it means.</p>
     <details class="about"><summary>About this data</summary><p>Governing party shown with the year it took office. Debt reflects decisions by current and earlier governments: Queensland's LNP took office in October 2024 and inherited part of its debt path. Tasmania's 2026-27 debt is an estimate. "—" means no comparable figure. Unemployment uses the February 2026 trend series, the latest with all six states; Victoria's August figure is 5.2%.</p></details>
   </div>
@@ -1010,6 +1027,32 @@ function rankOf(vals,i,dir){
   });
   h+='</tbody></table>';
   document.getElementById("matrix").innerHTML=h;
+})();
+/* Phone version of the state table: each measure as a ranked list, best first */
+(function(){
+  const el=document.getElementById("matrix-m"); if(!el) return;
+  const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  let h="";
+  ROWS.forEach(r=>{
+    if(r.g){h+=`<h4>${r.g}</h4>`;return;}
+    const lab=r.tip?`<span class="tip" tabindex="0" data-tip="${esc(r.tip)}">${r.l}</span>`:r.l;
+    if(r.text){
+      h+=`<div class="mm"><div class="mm-h"><span>${lab}</span></div><ul class="mm-l text">`+
+        STATES.map(([st],i)=>`<li class="${i===VIC?"vic":""}"><b>${st}</b>${r.warn[i]?`<span class="badge b-warn">${r.text[i]}</span>`:r.text[i]}</li>`).join("")+`</ul></div>`;
+      return;
+    }
+    const have=STATES.map((x,i)=>i).filter(i=>r.v[i]!=null);
+    const none=STATES.map((x,i)=>i).filter(i=>r.v[i]==null);
+    const order=r.dir?[...have].sort((a,b)=>r.dir==="low"?r.v[a]-r.v[b]:r.v[b]-r.v[a]):have;
+    const rows=Math.ceil(order.length/2);
+    const rk=rankOf(r.v,VIC,r.dir);
+    h+=`<div class="mm"><div class="mm-h"><span>${lab}</span>${rk?`<span class="mm-r">Vic ${rk}</span>`:""}</div>`+
+      `<ol class="mm-l" style="grid-template-rows:repeat(${rows},auto)">`+
+      order.map(i=>`<li class="${[tierOf(r.v,i,r.dir),i===VIC?"vic":""].join(" ")}"><span>${STATES[i][0]}</span><span class="v">${r.f(r.v[i])}</span></li>`).join("")+`</ol>`+
+      (none.length?`<div class="nd">${none.map(i=>STATES[i][0]+(r.na&&r.na[i]?" ("+r.na[i]+")":"")).join(", ")}: ${none.some(i=>r.na&&r.na[i])?"not comparable":"no comparable figure"}</div>`:"")+
+      (r.dir?"":`<div class="nd">Not ranked; shown in state order.</div>`)+`</div>`;
+  });
+  el.innerHTML=h;
 })();
 /* Debt line chart */
 const CPI={1983:35.3,1992:59.9,1999:68.5,2008:91.6,2010:95.8,2014:105.9,2017:110.7,2019:114.8,2020:114.4,2021:118.8,2022:126.1,2023:133.7,2025:141.7,2026:147.1};
